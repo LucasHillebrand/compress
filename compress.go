@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 type fileTree struct {
@@ -74,13 +75,13 @@ type compressedStruct struct {
 }
 
 func loadStream(stream string) compressedStruct {
-	file := Split(stream, "\n")
+	file := strings.Split(stream, "\n")
 	dirs := make([]string, 0)
 	filenames := make([]string, 0)
 	data := make([]string, 0)
 
 	for i := 0; i < len(file); i++ {
-		ln := Split(file[i], ":")
+		ln := strings.Split(file[i], ":")
 		if ln[0] == "DIR" {
 			dirs = append(dirs, ln[1])
 		} else if ln[0] == "FILE" {
